@@ -1329,174 +1329,98 @@ body.dark-mode .form-group textarea {
     }
 }
 
+/* Mobile-specific hero fixes */
 @media (max-width: 576px) {
-    .section {
-        padding: 60px 0;
-    }
-    
-    .section-title {
-        font-size: 1.8rem;
-    }
-    
-    .hero-title {
-        font-size: 2.2rem;
-    }
-    
-    .hero-subtitle {
-        font-size: 1.2rem;
-    }
-    
-    .hero-buttons {
-        flex-direction: column;
-    }
-    
-    .about-details {
-        grid-template-columns: 1fr;
-    }
-    
-    .skills-tabs, .project-filters {
-        flex-wrap: wrap;
-    }
-    
-    .footer-content {
-        grid-template-columns: 1fr;
-    }
-    
-    .footer-newsletter form {
-        flex-direction: column;
-    }
-    
-    .footer-newsletter input {
-        border-radius: var(--border-radius-sm);
-        margin-bottom: 10px;
-    }
-    
-    .footer-newsletter button {
-        border-radius: var(--border-radius-sm);
-        padding: 12px;
-    }
-
-
-/* Extra Small Devices (phones, 400px and below) */
-@media (max-width: 400px) {
-    /* Further reduce section padding */
-    .section {
-        padding: 40px 0;
-    }
-
-    /* Adjust hero section for very small screens */
     .hero {
-        min-height: auto;
-        padding: 100px 0 60px;
-    }
-
-    /* Make headings even smaller */
-    .section-title {
-        font-size: 1.5rem;
-    }
-
-    .hero-title {
-        font-size: 1.8rem;
-        margin-bottom: 15px;
-    }
-
-    .hero-subtitle {
-        font-size: 1rem;
-    }
-
-    /* Adjust navigation for very small screens */
-    .nav-menu {
-        width: 50%;
-        padding: 10px;
-    }
-
-    .logo {
-        font-size: 1.4rem;
-    }
-
-    /* Make project cards full width with less margin */
-    .projects-grid {
-        grid-template-columns: 1fr;
-        gap: 20px;
-    }
-
-    /* Adjust project image height */
-    .project-image {
-        height: 200px;
-    }
-
-    /* Stack all buttons vertically */
-    .btn {
-        display: flex;
-        width: 100%;
-        justify-content: center;
-    }
-
-    /* Adjust button groups */
-    .hero-buttons, .skills-tabs, .project-filters {
-        gap: 10px;
-    }
-
-    /* Simplify skill bars */
-    .skills-content {
-        padding: 20px;
-    }
-
-    .progress-bar {
-        height: 6px;
-    }
-
-    /* Adjust testimonial cards */
-    .testimonial-card {
-        padding: 20px;
-        margin: 10px;
-    }
-
-    /* Make contact form more compact */
-    .contact-form, .contact-card {
-        padding: 20px;
-    }
-
-    /* Further reduce footer padding */
-    .footer {
-        padding: 50px 0 0;
-    }
-
-    /* Hide decorative elements if needed */
-    .section-title::after {
-        display: none;
-    }
-
-    /* Adjust back-to-top button position */
-    .back-to-top {
-        bottom: 15px;
-        right: 15px;
-        width: 40px;
-        height: 40px;
-        font-size: 1rem;
-    }
-}    
-/* Special adjustments for mobile devices only */
-@media (max-width: 576px) and (hover: none) and (pointer: coarse) {
-    .hero {
-      padding-top: 120px; /* Adjust for mobile header */
-      min-height: 100vh;
+      padding: 120px 0 40px;
+      min-height: auto;
       height: auto;
+      overflow: hidden;
+      display: block; /* Change from flex to block */
     }
   
     .hero .container {
-      grid-template-columns: 1fr;
+      display: flex;
+      flex-direction: column;
       gap: 30px;
+      padding: 0 15px;
+    }
+  
+    .hero-content {
+      order: 2;
+      text-align: center;
+      width: 100%;
+      padding: 0 10px;
+    }
+  
+    .hero-title {
+      font-size: 2rem;
+      line-height: 1.2;
+      word-break: break-word;
+    }
+  
+    .hero-subtitle {
+      font-size: 1.1rem;
+      margin-bottom: 15px;
+    }
+  
+    .hero-description {
+      font-size: 1rem;
+      margin-bottom: 20px;
+    }
+  
+    .hero-buttons {
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 25px;
+    }
+  
+    .hero-social {
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 20px;
+    }
+  
+    .social-link {
+      width: 36px;
+      height: 36px;
+      font-size: 1rem;
     }
   
     .hero-image {
+      order: 1;
+      width: 100%;
       max-width: 280px;
       margin: 0 auto;
     }
   
-    /* Prevent mobile browsers from zooming on inputs */
-    input, textarea, select {
-      font-size: 16px !important;
+    .image-wrapper {
+      max-width: 250px;
+      margin: 0 auto;
+    }
+  
+    .shape {
+      display: none; /* Hide decorative shapes on mobile */
     }
   }
-}
+  
+  /* For very small phones (under 400px) */
+  @media (max-width: 400px) {
+    .hero-title {
+      font-size: 1.8rem;
+    }
+    
+    .hero-subtitle {
+      font-size: 1rem;
+    }
+    
+    .hero-social {
+      gap: 8px;
+    }
+    
+    .hero-buttons .btn {
+      padding: 10px 15px;
+      font-size: 0.9rem;
+    }
+  }
