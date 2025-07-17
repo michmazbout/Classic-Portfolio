@@ -1375,4 +1375,105 @@ body.dark-mode .form-group textarea {
         border-radius: var(--border-radius-sm);
         padding: 12px;
     }
+
+
+/* Extra Small Devices (phones, 400px and below) */
+@media (max-width: 400px) {
+    /* Further reduce section padding */
+    .section {
+        padding: 40px 0;
+    }
+
+    /* Adjust hero section for very small screens */
+    .hero {
+        min-height: auto;
+        padding: 100px 0 60px;
+    }
+
+    /* Make headings even smaller */
+    .section-title {
+        font-size: 1.5rem;
+    }
+
+    .hero-title {
+        font-size: 1.8rem;
+        margin-bottom: 15px;
+    }
+
+    .hero-subtitle {
+        font-size: 1rem;
+    }
+
+    /* Adjust navigation for very small screens */
+    .nav-menu {
+        width: 90%;
+        padding: 20px;
+    }
+
+    .logo {
+        font-size: 1.4rem;
+    }
+
+    /* Make project cards full width with less margin */
+    .projects-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    /* Adjust project image height */
+    .project-image {
+        height: 200px;
+    }
+
+    /* Stack all buttons vertically */
+    .btn {
+        display: flex;
+        width: 100%;
+        justify-content: center;
+    }
+
+    /* Adjust button groups */
+    .hero-buttons, .skills-tabs, .project-filters {
+        gap: 10px;
+    }
+
+    /* Simplify skill bars */
+    .skills-content {
+        padding: 20px;
+    }
+
+    .progress-bar {
+        height: 6px;
+    }
+
+    /* Adjust testimonial cards */
+    .testimonial-card {
+        padding: 20px;
+        margin: 10px;
+    }
+
+    /* Make contact form more compact */
+    .contact-form, .contact-card {
+        padding: 20px;
+    }
+
+    /* Further reduce footer padding */
+    .footer {
+        padding: 50px 0 0;
+    }
+
+    /* Hide decorative elements if needed */
+    .section-title::after {
+        display: none;
+    }
+
+    /* Adjust back-to-top button position */
+    .back-to-top {
+        bottom: 15px;
+        right: 15px;
+        width: 40px;
+        height: 40px;
+        font-size: 1rem;
+    }
+}    
 }
