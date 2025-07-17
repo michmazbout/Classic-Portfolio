@@ -1476,4 +1476,27 @@ body.dark-mode .form-group textarea {
         font-size: 1rem;
     }
 }    
+/* Special adjustments for mobile devices only */
+@media (max-width: 576px) and (hover: none) and (pointer: coarse) {
+    .hero {
+      padding-top: 120px; /* Adjust for mobile header */
+      min-height: 100vh;
+      height: auto;
+    }
+  
+    .hero .container {
+      grid-template-columns: 1fr;
+      gap: 30px;
+    }
+  
+    .hero-image {
+      max-width: 280px;
+      margin: 0 auto;
+    }
+  
+    /* Prevent mobile browsers from zooming on inputs */
+    input, textarea, select {
+      font-size: 16px !important;
+    }
+  }
 }
