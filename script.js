@@ -1,6 +1,5 @@
 document.addEventListener('DOMContentLoaded', function () {
     // Set current year in footer
-    const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0 || navigator.msMaxTouchPoints > 0;
     document.getElementById('year').textContent = new Date().getFullYear();
 
     // Navigation toggle
@@ -81,10 +80,34 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 
-    // Project filtering
-    const filterBtns = document.querySelectorAll('.filter-btn');
+    // Project filtering - using data-category as in your original working version
+    const filterBtns = document.querySelectorAll('.project-filters .filter-btn');
+    const projectCards = document.querySelectorAll('.project-card'); // Changed from projectItems to projectCards
+
+    filterBtns.forEach(btn => {
+        btn.addEventListener('click', function(e) {
+            // Prevent event from interfering with mobile card clicks
+            e.stopPropagation();
+            
+            // Remove active class from all buttons
+            filterBtns.forEach(btn => btn.classList.remove('active'));
+            // Add active class to clicked button
+            this.classList.add('active');
+            
+            const filter = this.getAttribute('data-filter');
+            
+            projectCards.forEach(card => {
+                if (filter === 'all' || card.getAttribute('data-category') === filter) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        });
+    });
+
     // Project card hover/click functionality
-    const projectCards = document.querySelectorAll('.project-card');
+    const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0 || navigator.msMaxTouchPoints > 0;
 
     projectCards.forEach(card => {
         const cardInfo = card.querySelector('.project-info');
@@ -92,6 +115,9 @@ document.addEventListener('DOMContentLoaded', function () {
         if (isTouchDevice) {
             // For touch devices (mobile)
             card.addEventListener('click', function(e) {
+                // Prevent this from triggering filter button clicks
+                e.stopPropagation();
+                
                 // Close all other open project infos first
                 document.querySelectorAll('.project-info.active').forEach(activeInfo => {
                     if (activeInfo !== cardInfo) {
@@ -116,12 +142,13 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Close project info when clicking anywhere else on the page
     document.addEventListener('click', function(e) {
-        if (isTouchDevice && !e.target.closest('.project-card')) {
+        if (isTouchDevice && !e.target.closest('.project-card') && !e.target.closest('.project-filters')) {
             document.querySelectorAll('.project-info.active').forEach(activeInfo => {
                 activeInfo.classList.remove('active');
             });
         }
     });
+
 
     // Testimonials slider (assuming Swiper.js included)
     const testimonialSwiper = new Swiper('.testimonials-slider', {
