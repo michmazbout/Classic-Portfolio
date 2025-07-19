@@ -1,5 +1,6 @@
 document.addEventListener('DOMContentLoaded', function () {
     // Set current year in footer
+    const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0 || navigator.msMaxTouchPoints > 0;
     document.getElementById('year').textContent = new Date().getFullYear();
 
     // Navigation toggle
@@ -18,7 +19,7 @@ document.addEventListener('DOMContentLoaded', function () {
             navMenu.classList.remove('active');
         });
     }
-
+    
     // Close menu when clicking on a nav link
     const navLinks = document.querySelectorAll('.nav-link');
     navLinks.forEach(link => {
@@ -82,23 +83,44 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Project filtering
     const filterBtns = document.querySelectorAll('.filter-btn');
+    // Project card hover/click functionality
     const projectCards = document.querySelectorAll('.project-card');
 
-    filterBtns.forEach(btn => {
-        btn.addEventListener('click', () => {
-            filterBtns.forEach(btn => btn.classList.remove('active'));
-            btn.classList.add('active');
-
-            const filter = btn.getAttribute('data-filter');
-
-            projectCards.forEach(card => {
-                if (filter === 'all' || card.getAttribute('data-category') === filter) {
-                    card.style.display = 'block';
-                } else {
-                    card.style.display = 'none';
-                }
+    projectCards.forEach(card => {
+        const cardInfo = card.querySelector('.project-info');
+        
+        if (isTouchDevice) {
+            // For touch devices (mobile)
+            card.addEventListener('click', function(e) {
+                // Close all other open project infos first
+                document.querySelectorAll('.project-info.active').forEach(activeInfo => {
+                    if (activeInfo !== cardInfo) {
+                        activeInfo.classList.remove('active');
+                    }
+                });
+                
+                // Toggle this card's info
+                cardInfo.classList.toggle('active');
             });
-        });
+        } else {
+            // For non-touch devices (desktop)
+            card.addEventListener('mouseenter', function() {
+                cardInfo.classList.add('active');
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                cardInfo.classList.remove('active');
+            });
+        }
+    });
+
+    // Close project info when clicking anywhere else on the page
+    document.addEventListener('click', function(e) {
+        if (isTouchDevice && !e.target.closest('.project-card')) {
+            document.querySelectorAll('.project-info.active').forEach(activeInfo => {
+                activeInfo.classList.remove('active');
+            });
+        }
     });
 
     // Testimonials slider (assuming Swiper.js included)

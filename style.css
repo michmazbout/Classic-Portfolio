@@ -1224,6 +1224,24 @@ body.dark-mode .form-group textarea {
     box-shadow: var(--shadow-lg);
 }
 
+.project-info {
+    /* Your existing styles */
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+}
+
+.project-info.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* For touch devices, you might want to add this */
+@media (hover: none) {
+    .project-card {
+        cursor: pointer; /* Makes it clear it's clickable */
+    }
+}
 /* Responsive Styles */
 @media (max-width: 992px) {
     .hero .container {
