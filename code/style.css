@@ -746,6 +746,7 @@ body.dark-mode .filter-btn {
     transition-delay: 0.2s;
 }
 
+
 .project-card:hover .project-overlay {
     opacity: 1;
 }
@@ -755,7 +756,6 @@ body.dark-mode .filter-btn {
 .project-card:hover .project-link {
     transform: translateY(0);
 }
-
 .project-card:hover .project-image img {
     transform: scale(1.1);
 }
@@ -778,6 +778,7 @@ body.dark-mode .filter-btn {
     transition: var(--transition-normal);
     text-align: center;
 }
+
 
 body.dark-mode .service-card {
     background-color: var(--dark-card);
