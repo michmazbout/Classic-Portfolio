@@ -3,7 +3,7 @@ export default async function handler(req, res) {
     return res.status(405).json({ message: 'Method Not Allowed' });
   }
 
-  const { email, message } = req.body;
+  const { name, email, subject, message } = req.body;
   const webhookUrl = process.env.DISCORD_WEBHOOK_URL;
 
   if (!webhookUrl) {
@@ -13,29 +13,33 @@ export default async function handler(req, res) {
   const discordPayload = {
     embeds: [
       {
-        title: 'New Contact Message',
-        color: 0x5865f2,
+        title: subject || 'New Contact Form Submission',
+        color: 0x00b0f4,
         fields: [
-          { name: 'Email', value: email || 'No email' },
-          { name: 'Message', value: message || 'No message' },
+          { name: '🧑 Name', value: name || 'No name provided' },
+          { name: '📧 Email', value: email || 'No email provided' },
+          { name: '✉️ Message', value: message || 'No message provided' }
         ],
-        timestamp: new Date().toISOString(),
-      },
-    ],
+        footer: {
+          text: '📬 New message from your website contact form'
+        },
+        timestamp: new Date().toISOString()
+      }
+    ]
   };
 
   try {
     const discordRes = await fetch(webhookUrl, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(discordPayload),
+      body: JSON.stringify(discordPayload)
     });
 
     if (!discordRes.ok) {
       throw new Error(`Discord error ${discordRes.status}`);
     }
 
-    return res.status(200).json({ message: 'Sent successfully!' });
+    return res.status(200).json({ message: 'Message sent successfully!' });
   } catch (err) {
     console.error(err);
     return res.status(500).json({ message: 'Failed to send message' });

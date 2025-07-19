@@ -665,28 +665,39 @@
                             <a href="https://maps.app.goo.gl/ragaPYpLXiEYSRYr5" target="_blank">View Map</a>
                         </div>
                     </div>
-                    
                     <form id="contactForm" class="contact-form">
                         <div class="form-group">
+                          <input type="text" name="name" placeholder="Your Name" required />
+                        </div>
+                        <div class="form-group">
                           <input type="email" name="email" placeholder="Your Email" required />
+                        </div>
+                        <div class="form-group">
+                          <input type="text" name="subject" placeholder="Subject" />
                         </div>
                         <div class="form-group">
                           <textarea name="message" placeholder="Your Message" required></textarea>
                         </div>
                         <button type="submit" class="btn btn-primary">Send Message</button>
-                    </form>
+                      </form>
+                      
                       <script>
                         document.getElementById('contactForm').addEventListener('submit', async function (e) {
                           e.preventDefault();
                           const form = e.target;
-                          const email = form.email.value.trim();
-                          const message = form.message.value.trim();
+                      
+                          const formData = {
+                            name: form.name.value.trim(),
+                            email: form.email.value.trim(),
+                            subject: form.subject.value.trim(),
+                            message: form.message.value.trim()
+                          };
                       
                           try {
                             const res = await fetch('/api/sendMessage', {
                               method: 'POST',
                               headers: { 'Content-Type': 'application/json' },
-                              body: JSON.stringify({ email, message }),
+                              body: JSON.stringify(formData)
                             });
                       
                             const data = await res.json();
@@ -698,6 +709,7 @@
                           }
                         });
                       </script>
+                      
                       
                     <script>
                         (() => {
