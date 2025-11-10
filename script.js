@@ -63,7 +63,7 @@ document.addEventListener('DOMContentLoaded', function () {
             behavior: 'smooth'
         });
     });
-
+    
     // Skills tabs
     const tabBtns = document.querySelectorAll('.tab-btn');
     const tabContents = document.querySelectorAll('.tab-content');
