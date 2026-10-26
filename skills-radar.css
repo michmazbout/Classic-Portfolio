@@ -1,0 +1,183 @@
+/* Skills radar — drop-in styles
+   Change the variables below to match your site. */
+.skills-radar {
+  /* Pulled from your site's :root variables (fallbacks in case they're renamed) */
+  --sr-accent: var(--primary-color, #2563eb);
+  --sr-accent-2: var(--secondary-color, #7c3aed);
+  --sr-accent-soft: rgba(37, 99, 235, 0.14);
+  --sr-text: var(--text-dark, #1e293b);
+  --sr-muted: var(--text-light, #64748b);
+  --sr-grid: rgba(100, 116, 139, 0.22);
+  --sr-surface: var(--bg-color, #ffffff);
+  --sr-surface-alt: var(--card-bg, #f1f5f9);
+  --sr-border: var(--border-color, #e2e8f0);
+  --sr-shadow: 0 10px 30px -12px rgba(15, 23, 42, 0.12);
+  --sr-radius: var(--border-radius, 12px);
+  --sr-heading-font: var(--heading-font, "Space Grotesk", sans-serif);
+
+  color: var(--sr-text);
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+/* Dark mode: follows your site's theme toggle (body.dark-mode) */
+body.dark-mode .skills-radar {
+  --sr-accent: #3b82f6;
+  --sr-accent-2: #8b5cf6;
+  --sr-accent-soft: rgba(59, 130, 246, 0.18);
+  --sr-text: var(--dark-text, #e2e8f0);
+  --sr-muted: #94a3b8;
+  --sr-grid: rgba(148, 163, 184, 0.2);
+  --sr-surface: var(--dark-card, #1e293b);
+  --sr-surface-alt: rgba(255, 255, 255, 0.05);
+  --sr-border: var(--dark-border, #334155);
+  --sr-shadow: 0 10px 30px -12px rgba(0, 0, 0, 0.5);
+}
+
+/* ---------- Tabs ---------- */
+.sr-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 1.5rem;
+}
+.sr-tab {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 18px 10px 10px;
+  background: var(--sr-surface);
+  border: 1.5px solid var(--sr-border);
+  border-radius: var(--sr-radius);
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+  transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+}
+.sr-tab:hover { transform: translateY(-3px); }
+.sr-tab[aria-selected="true"] {
+  border-color: var(--sr-accent);
+  box-shadow: 0 10px 28px -14px var(--sr-accent-2);
+}
+.sr-tab:focus-visible { outline: 2px solid var(--sr-accent); outline-offset: 3px; }
+.sr-mini { width: 52px; height: 52px; flex: none; }
+.sr-mini .sr-mini-ring { fill: none; stroke: var(--sr-grid); }
+.sr-mini .sr-mini-shape { fill: var(--sr-accent-soft); stroke: var(--sr-accent); stroke-width: 1.5; stroke-linejoin: round; }
+.sr-tab-text { display: flex; flex-direction: column; text-align: left; line-height: 1.35; }
+.sr-tab-title { font-family: var(--sr-heading-font); font-weight: 600; font-size: 0.95rem; }
+.sr-tab-title i { color: var(--sr-accent); }
+.sr-tab-meta { font-size: 0.78rem; color: var(--sr-muted); }
+
+/* ---------- Card body ---------- */
+.sr-body {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+  gap: 2rem;
+  align-items: center;
+  padding: 1.5rem;
+  background: var(--sr-surface);
+  border: 1px solid var(--sr-border);
+  border-radius: calc(var(--sr-radius) + 6px);
+  box-shadow: var(--sr-shadow);
+}
+
+/* ---------- Chart ---------- */
+.sr-chart { position: relative; }
+.sr-svg { display: block; width: 100%; height: auto; overflow: visible; }
+.sr-ring { fill: none; stroke: var(--sr-grid); stroke-width: 1; }
+.sr-ring--outer { stroke-width: 1.5; }
+.sr-axis { stroke: var(--sr-grid); stroke-width: 1; }
+.sr-shape {
+  fill: url(#sr-grad);
+  fill-opacity: 0.18;
+  stroke: url(#sr-grad);
+  stroke-width: 2.5;
+  stroke-linejoin: round;
+}
+.sr-label { font-size: 13px; fill: var(--sr-muted); transition: fill 0.2s ease; }
+.sr-label.is-active { fill: var(--sr-text); font-weight: 600; }
+.sr-hit { fill: transparent; cursor: pointer; }
+.sr-dot {
+  fill: var(--sr-surface);
+  stroke: var(--sr-accent);
+  stroke-width: 2.5;
+  transform-box: fill-box;
+  transform-origin: center;
+  transition: transform 0.2s ease, fill 0.2s ease;
+  pointer-events: none;
+}
+.sr-pt.is-active .sr-dot { transform: scale(1.5); fill: var(--sr-accent); }
+.sr-stop-1 { stop-color: var(--sr-accent); }
+.sr-stop-2 { stop-color: var(--sr-accent-2); }
+
+.sr-tip {
+  position: absolute;
+  left: 0;
+  top: 0;
+  transform: translate(-50%, calc(-100% - 14px));
+  padding: 6px 10px;
+  background: var(--sr-text);
+  color: var(--sr-surface);
+  border-radius: 8px;
+  font-size: 0.8rem;
+  max-width: 220px;
+  width: max-content;
+  text-align: center;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.15s ease;
+}
+.sr-tip.is-visible { opacity: 1; }
+
+/* ---------- Skill list ---------- */
+.sr-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 4px; }
+.sr-item {
+  padding: 10px 12px;
+  border-radius: 10px;
+  outline: none;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+.sr-item.is-active { background: var(--sr-surface-alt); transform: translateX(4px); }
+.sr-item:focus-visible { box-shadow: inset 0 0 0 2px var(--sr-accent); }
+.sr-row { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; margin-bottom: 6px; }
+.sr-name { font-size: 0.92rem; font-weight: 500; }
+.sr-meta { display: flex; align-items: baseline; gap: 10px; flex: none; }
+.sr-level { font-size: 0.7rem; letter-spacing: 0.04em; text-transform: uppercase; color: var(--sr-muted); }
+.sr-value {
+  min-width: 4ch;
+  text-align: right;
+  font-size: 0.85rem;
+  font-family: var(--sr-heading-font);
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  color: var(--sr-accent);
+}
+.sr-bar { display: block; height: 5px; background: var(--sr-grid); border-radius: 99px; overflow: hidden; }
+.sr-fill {
+  display: block;
+  width: 0;
+  height: 100%;
+  background: linear-gradient(90deg, var(--sr-accent), var(--sr-accent-2));
+  border-radius: inherit;
+  transition: width 0.9s cubic-bezier(0.2, 0.8, 0.2, 1) var(--d, 0ms);
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 768px) {
+  .sr-body { grid-template-columns: 1fr; gap: 1rem; padding: 1rem; }
+  .sr-tab { padding: 8px 14px 8px 8px; }
+  .sr-mini { width: 40px; height: 40px; }
+  .sr-label { font-size: 17px; }
+  .sr-svg { margin: 0 -8px; width: calc(100% + 16px); }
+}
+@media (max-width: 480px) {
+  .sr-tabs { gap: 8px; }
+  .sr-tab-meta { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .skills-radar *,
+  .skills-radar *::before,
+  .skills-radar *::after { transition: none !important; }
+}
