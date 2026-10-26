@@ -6,43 +6,58 @@
   /* ---------- Your data: edit values (0–100) here ---------- */
   const SKILLS = [
     {
+      id: "data",
+      label: "Data Science",
+      icon: "uil-chart-line",
+      skills: [
+        { name: "Python", short: "Python", value: 95 },
+        { name: "R", short: "R", value: 88 },
+        { name: "Bayesian Modeling", tools: "Stan, PyMC, Turing.jl", short: "Bayesian", value: 90 },
+        { name: "Machine Learning", tools: "scikit-learn, XGBoost, AutoGluon", short: "Machine learning", value: 87 },
+        { name: "Spatial Statistics & Cross-Validation", short: "Spatial stats", value: 85 },
+        { name: "Uncertainty Quantification", short: "Uncertainty", value: 84 },
+        { name: "Dev Tools", tools: "Flask, Docker, Git, Linux", short: "Dev tools", value: 80 },
+        { name: "Other Languages", tools: "Julia, Rust, JavaScript", short: "Julia/Rust/JS", value: 70 },
+      ],
+    },
+    {
+      id: "geospatial",
+      label: "Geospatial",
+      icon: "uil-map",
+      skills: [
+        { name: "QGIS & ArcGIS", short: "QGIS/ArcGIS", value: 95 },
+        { name: "Google Earth Engine", tools: "JS & Python", short: "Earth Engine", value: 92 },
+        { name: "Satellite Data", tools: "Sentinel, Landsat, GEDI", short: "Satellite data", value: 90 },
+        { name: "DEM Analysis", tools: "xDEM, lidR", short: "DEM analysis", value: 86 },
+        { name: "LiDAR & UAV/SfM Processing", short: "LiDAR & UAV", value: 82 },
+        { name: "Photogrammetry & 3D Modeling", short: "Photogrammetry", value: 80 },
+      ],
+    },
+    {
+      id: "environment",
+      label: "Environment",
+      icon: "uil-globe",
+      skills: [
+        { name: "Natural Hazards & Risk", short: "Hazards", value: 92 },
+        { name: "Above-Ground Biomass Estimation", short: "Biomass", value: 88 },
+        { name: "Environmental Impact Assessment", short: "EIA", value: 88 },
+        { name: "Carbon MRV & Standards", tools: "Verra, Gold Standard, Isometric", short: "Carbon MRV", value: 85 },
+        { name: "Sustainability Assessment", short: "Sustainability", value: 85 },
+        { name: "GHG Accounting", short: "GHG", value: 80 },
+        { name: "Life Cycle Assessment", short: "LCA", value: 75 },
+      ],
+    },
+    {
       id: "engineering",
       label: "Engineering",
       icon: "uil-cog",
       skills: [
-        { name: "CAD Design (Solidworks, AutoCAD)", short: "CAD", value: 95 },
+        { name: "CAD", tools: "SolidWorks, AutoCAD", short: "CAD", value: 92 },
+        { name: "Thermodynamics & Mechanics", short: "Thermo & mech.", value: 85 },
         { name: "Finite Element Analysis", short: "FEA", value: 82 },
-        { name: "Fluid Mechanics", short: "Fluids", value: 78 },
-        { name: "Material Science", short: "Materials", value: 85 },
-        { name: "Sustainable Manufacturing", short: "Sust. mfg.", value: 65 },
-        { name: "Thermodynamics", short: "Thermo", value: 80 },
-      ],
-    },
-    {
-      id: "environmental",
-      label: "Environmental",
-      icon: "uil-map",
-      skills: [
-        { name: "GIS (ArcGIS, QGIS)", short: "GIS", value: 94 },
-        { name: "Remote Sensing", short: "Remote sensing", value: 78 },
-        { name: "Environmental Impact Assessment", short: "EIA", value: 93 },
-        { name: "Sustainability Assessment", short: "Sustainability", value: 86 },
-        { name: "Hazard & Risk Management", short: "Hazard & risk", value: 97 },
-      ],
-    },
-    {
-      id: "programming",
-      label: "Programming",
-      icon: "uil-laptop",
-      skills: [
-        { name: "Python", short: "Python", value: 95 },
-        { name: "R", short: "R", value: 82 },
-        { name: "JavaScript", short: "JavaScript", value: 80 },
-        { name: "CSS/HTML", short: "CSS/HTML", value: 92 },
-        { name: "Rust", short: "Rust", value: 62 },
-        { name: "Julia", short: "Julia", value: 58 },
-        { name: "Data Analysis", short: "Data", value: 93 },
-        { name: "MATLAB", short: "MATLAB", value: 76 },
+        { name: "Fluid Mechanics", short: "Fluids", value: 80 },
+        { name: "Materials Science", short: "Materials", value: 80 },
+        { name: "Computational Fluid Dynamics", tools: "Ansys", short: "CFD", value: 75 },
       ],
     },
   ];
@@ -175,7 +190,7 @@
     listEl.innerHTML = cat.skills.map((s, i) => `
       <li class="sr-item" tabindex="0" data-i="${i}">
         <div class="sr-row">
-          <span class="sr-name">${s.name}</span>
+          <span class="sr-name">${s.name}${s.tools ? `<span class="sr-tools">${s.tools}</span>` : ""}</span>
           <span class="sr-meta">
             <span class="sr-level">${levelOf(s.value)}</span>
             <span class="sr-value">0%</span>

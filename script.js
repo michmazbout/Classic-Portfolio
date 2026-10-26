@@ -64,6 +64,7 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
     
+    
     // Skills tabs
     const tabBtns = document.querySelectorAll('.tab-btn');
     const tabContents = document.querySelectorAll('.tab-content');
@@ -79,7 +80,7 @@ document.addEventListener('DOMContentLoaded', function () {
             document.getElementById(tabId).classList.add('active');
         });
     });
-
+    
     // Project filtering - using data-category as in your original working version
     const filterBtns = document.querySelectorAll('.project-filters .filter-btn');
     const projectCards = document.querySelectorAll('.project-card'); // Changed from projectItems to projectCards
